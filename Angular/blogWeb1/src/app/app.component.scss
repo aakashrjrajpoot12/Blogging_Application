@@ -1,0 +1,15 @@
+.example-spacer {
+    flex: 1 1 auto
+
+  }
+
+  .style{
+    background:rgba(38, 79, 160, 0.635);
+  }
+ /* In your component's SCSS file */
+
+
+.custom-button:hover {
+  background-color: rgb(56, 56, 150)
+  /* Custom background color on hover */
+}

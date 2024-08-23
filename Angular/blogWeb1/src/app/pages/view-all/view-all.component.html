@@ -1,0 +1,34 @@
+<div class="card-container" *ngFor="let item of allPosts"> <!--Here allPosts is name of variable in which our all posts are saved ,Here item is used for single post-->
+    <mat-card> <!--Single card-->
+        <mat-card-header> <!--Header of card-->
+            <div mat-card-avatar class="example-header-image"></div><!--Logo/image for header-->
+            <mat-card-title>{{item.name}}</mat-card-title> <!--title/name for header-->
+            <!--sub-title for header-->
+            <!--Posted by is used for text and after this we will call item.postedBy, to format date we have used date: 'medium' -->
+            <mat-card-subtitle>posted by: {{item.postedBy}} | Posted on : {{ item.date| date: 'medium'}}</mat-card-subtitle>
+        </mat-card-header>
+    
+        <mat-grid-list cols="5"><!--his component creates a grid layout with a specified number of columns which is cols=5,to observe closely click on view All Post and see-->
+            <mat-grid-tile [colspan]="2" [rowspan]="1"><!--This tile spans across 2 columns and 1 row for image,to observe closely click on view All Post and see-->
+                <img mat-card-image [src]="item.image" class="post-img" alt="Card Image"/>
+                <!--[src]="item.image": Binds the image source to item.image, where item is likely an object in your component containing the image URL,you can see item.img in scss-->
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="3" [rowspan]="1"><!--This tile spans across 3 columns and 1 row for content,to observe closely click on view All Post and see-->
+                   <mat-card-content>
+                    {{ item.content.length >600 ? item.content.substr(0,600) +'...' :item.content}}<!--? is part of the ternary operator ,which is a shorthand way of writing an if-else statement. -->
+                   <!--{{Interpolation}}: This Angular syntax binds data from the component to the template.
+                   If the length of item.content exceeds 600 characters, it truncates the content to the first 600 characters and appends an ellipsis (...).-->
+                   </mat-card-content>
+                </mat-grid-tile>   
+        </mat-grid-list>
+
+       <hr>
+       <mat-card-actions>
+        <button mat-raised-button color="primary">{{item.likeCount}} <mat-icon>favorite</mat-icon></button>
+        <button mat-raised-button color="primary" style="margin-left: 5px;">{{item.viewCount}} <mat-icon>removed_red_eye</mat-icon></button>
+        <button mat-raised-button color="primary"style="margin-left: 5px;" routerLink="/view-post/{{item.id}}">View Post</button>
+       </mat-card-actions>
+
+    </mat-card>
+
+</div>

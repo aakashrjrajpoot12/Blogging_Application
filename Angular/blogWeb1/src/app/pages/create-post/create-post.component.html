@@ -1,0 +1,61 @@
+
+<!--Reactive form to create Post-->
+
+<mat-card class="center-card">
+  <mat-card-content><!--To add content-->
+    <div>
+      <form [formGroup]="postForm"> <!--for formgroup we are binding with postform -->
+        <mat-form-field appearance="fill"><!--to mention controls we are using <mat-form-field>  -->
+          <mat-label>Name</mat-label><!--tag for label-->
+          <input matInput formControlName="name" /><!--tag for input-->
+        </mat-form-field><!---->
+
+        <mat-form-field appearance="fill">
+          <mat-label>Img</mat-label>
+          <input matInput formControlName="img" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Content</mat-label>
+          <textarea matInput rows="5" formControlName="content"></textarea>
+        </mat-form-field>
+       
+       
+       
+        <mat-form-field appearance="fill">
+          <mat-label>Posted By</mat-label>
+          <input matInput formControlName="postedBy" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Tags</mat-label>
+          <mat-chip-grid #chipGrid aria-label="Enter tags">
+            <mat-chip-row
+              *ngFor="let tag of tags; let i = index"
+              (removed)="remove(tag)"
+            >
+              {{ tag }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon><!--displays a "cancel" icon (usually an "X" symbol).-->
+              </button>    <!--This button is styled using Angular Material's matChipRemove directive.-->
+            </mat-chip-row>
+            <input
+              placeholder="New Tag..."
+              [matChipInputFor]="chipGrid"
+              (matChipInputTokenEnd)="add($event)"
+            />
+          </mat-chip-grid>
+        </mat-form-field>
+         <!--mat-raised-button: This is an Angular Material directive that applies a raised button style to the button. Raised buttons add more dimension to flat layouts.-->
+        <button
+          mat-raised-button
+          color="primary"
+          style="float: right;"
+          [disabled]="postForm.valid"
+          (click)="createPost()">Create New Post </button><!--This is an event binding,When the button is clicked, it triggers the createPost() method, which is typically defined in the component's -->
+
+
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>

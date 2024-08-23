@@ -1,0 +1,330 @@
+How to open MySQl workbench for this project:
+
+.................................
+
+open application>>click on LOCAL Instance 3306>> click on Schemas>>blog_server>>tables>> you can see all records which are posted
+>>post(there is logo which is of calender type click on that)>>
+
+
+
+
+Step1: inside application.properties
+.............................
+write code for mysql connection
+
+
+
+
+Step2: 
+.............................
+Search in chrome:  angular material >>get started>>
+run code in terminal to install angular material: ng add @angular/material
+Y/N => Y
+indigo/pink
+Y/N => N
+
+Search in chrome:  angular material >>component>>toolbar
+copy html code from there and css
+
+
+
+Step3:
+.............................
+create new file inside app and paste required code over there required for material UI >> angularmaterialmodule.ts
+
+step4:inside app.module.ts
+
+add neccesary imports over there like angularmaterialmodule,reactiveformsmodule,formsmodule
+
+
+
+Step4:Creating Post Entity & Create New Post Rest API 
+.............................
+>>create all package and classes which are req
+>>Inside entity class(POST) and add all variable and generate all getters and setters 
+>>create Postrepository, postservice, postserviceImp class
+>>Inside postserviceImp  create method savePost and mention savePost in postservice
+>>Inside postcontroller class create endpoint
+
+
+==>>Open postman  
+            POST:http://localhost:8080/api/posts
+{ 
+    "name":"Sample Post",
+    "content":"this is the content of post",
+    "postedBy":"John",
+    "image":"/Users/AA20387152/Desktop/cubes-677092_1280.png",
+    "tags":["tag1","tag2"]
+}  
+
+
+Click on send button to call API
+
+==>> open MySQl workbench to check data in db:
+
+.................................
+
+open application>>click on LOCAL Instance 3306>> click on Schemas>>blog_server>>tables>> you can see all records which are posted
+>>post(there is logo which is of calender type click on that)>>
+
+........................................................................................
+Step5: Inside app create folder with name page to collect components and service folder for service
+........................................................................................
+
+==>>generate compoenet with name create-post
+==>>Inside app-routing.module.ts file
+  create routes object 
+  >> 1st create object for create-post and provide path and components name over there
+  >>app.component.html,create button tag for create new post and provide routerlink 
+  >> in end of this provide <router-outlet></router-outlet>
+  >>Inside create-post.html add below code
+  <button mat-raised-button color="primary" style="float: right;"[disabled]="postForm.valid" 
+              (click)="createPost()">Create New Post </button>
+  >>Inside create-post.component.ts file add functionality over there
+   postForm!:FormGroup;
+   tags:string[]=[];   
+   >>  Inside create-post.component.ts file add below code       
+   add(event:any){
+  
+         }
+   >>add remove method,
+   remove(tag:any){ }  
+   >>Inside html   mat-form field for tags
+   add code 
+   >>inside create-post.scss
+   add required css
+   
+   ........................................................................................
+STEP6: Creating Post Service and calling Create Post API
+........................................................................................
+To create API we need to create service file 
+>>Open Integrated terminal inside service file and generate service file with name post( ng g s post)   
+>> Inside post.service.ts,we need to store basic url                 
+    const BASIC_URL='http://localhost:8080/';
+>>After this we need to inject API's, we need to inject Httpclient    
+>>createNewPost method inside postservice.ts
+>> Inside create-post.component.ts file ,Inside constructor add below line of code
+ private postService: PostService,
+>> Inside create-post.component.ts file create method createPost()
+
+........................................................................................
+Step6::Inside controller add crossorigin to connect frontend with backend
+........................................................................................
+
+>> CORS (Cross-Origin Resource Sharing) 
+It is a security feature implemented by web browsers to prevent web pages from making requests to a different domain (origin)  
+
+>>Inside controller 
+@CrossOrigin(origins="*")
+
+
+
+
+........................................................................................
+Step7: creating fullstack api to get all Posts
+........................................................................................
+
+>>Ins STS,Inside postServiceIMP create method getAllPosts()
+{} 
+>>Inside postService use that method
+>>inside controller create endpoint for getAllPosts(by using getmapping)
+>> Inside POstman 
+GET: http://localhost:8080/api/posts
+
+o/p we will se all posts in console of postman
+
+>>Inside vscode,post.service.ts,add getAllPosts() API,
+getAllPosts()
+
+........................................................................................
+step8: creating a new page to show all posts
+........................................................................................
+
+>>Create new component in vscode
+ng g c viewAll
+>>Inside app-routing.module.ts update object of routes
+{ path: 'view-all', component: ViewAllComponent },
+
+>>Inside app.compenent.html,create button for View All Posts
+<button mat-raised-button class="custom-button" routerLink="/view-all">View All Posts</button>
+
+>>inside View-all.components.ts
+provide all necessary code 
+>>inside view-all.component.html ,add necesary html code after that in .scss file add req css 
+
+
+
+
+
+........................................................................................
+step8: Creating API to get Post by ID and Updating view count
+........................................................................................
+>>Inside PostServiceIMP, create method getPostById to increase count by 1 if 
+>> mention post method name inside PostService.java 
+>>create endpoint inside controller
+
+>>Open POSTMAN to check our endpoint is working or not,
+GET: http://localhost:8080/api/posts/1
+
+
+........................................................................................
+Step9:creating new Page & calling Get Post By Id API
+........................................................................................
+
+>>create new component 
+ng g c ViewPost
+>>inside app-routing.module.ts,provide path and component name inside object
+>>go to view-all.component.html we need to add routerlink to viewpost button
+>>we need to create API call,Open post.service.ts ,we need to create getPostById
+>>inside view-post.component.ts
+ add necessary code related to 
+
+
+
+........................................................................................
+Step9:creating and testing Like Post API In Spring Boot
+........................................................................................
+>>open springboot  Inside PostServiceIMP, create method likepost
+>> mention likepost method name inside PostService.java 
+>>create endpoint inside controller
+
+
+>>Open POSTMAN to check our endpoint is working or not,
+PUT: http://localhost:8080/api/posts/1/like
+
+in above api 1 is id numer of post
+
+........................................................................................
+step10: creating comment entity and calling like post api
+........................................................................................
+
+>>Inside   post.service.ts  create Api with method name: likepost
+>>open   view-post.component.ts create method likePost()
+>>inside view-post.html add click event for postdata.likecount button
+
+
+
+
+
+........................................................................................
+Step11: Creating post comments API call in Spring boot
+........................................................................................
+
+>>create comment entity in springboot
+>>Inside CommentServiceImpl class create method createComment
+
+>>Inside commentcontroller create endpoint
+Open POSTMAN to check our endpoint is working or not,
+POST: http://localhost:8080/api/comments/create
+Select params>> Provide key and value 
+like KEY:postId   VALUE:1
+         postedBy       root
+         content        nice post
+         
+         
+........................................................................................
+Step12: Creating post comments API with reactive form
+........................................................................................
+
+>>Open Integrated terminal at service>> ng g s Comment
+>>Inside comment.service.ts 
+         provide const BASIC_URL 
+         create constructor
+         create createcomment method
+         create getAllCommentsByPost
+>>Inside View-post.component.ts ,create object of commentForm!:FormGroup;         
+          Inject formbuilder inside constructor
+          inside ngoninit we will use commentform and after this we will use form builder and 
+           inside group method we need to mention our controls 
+ >>Inside View-post.component.html   ,we need to crite code for comment inside mat-card       
+           
+
+........................................................................................
+Step13: creating get comments of post API in springboot
+........................................................................................
+>>Inside Repository of CommentRepository.java add below code
+         List<Comment> findByPostId(Long PostId);
+>>Inside commentserviceIMp  class create method   getCommentByPostId      
+  >> mention getCommentByPostId method name inside commentservice.java 
+>>create endpoint inside controller
+
+
+>>Open POSTMAN to check our endpoint is working or not,
+GET: http://localhost:8080/api/comments/1       
+1 is id
+         
+
+........................................................................................
+Step14: Calling Get Comments Api to show on Post Details
+........................................................................................
+In VSCODE
+>>Inside CommentService create methos getAllCommentsByPost
+>>open view-post.component.ts ,we need to create variable and type of variable is any
+       comments:any;
+       
+>>After this we need to  create method ,getCommentsByPost       
+>>After getting response  from API getCommentsByPost we need to mention it in getPostById,after getting response
+>>We need to mention API getCommentsByPost inside publishComment(),
+>>Inside view-post.component.html write html code 
+>>Open browser any And Validate VIEW ALL POST  from website
+
+
+
+........................................................................................
+Step15: Creating search post API in Spring Boot
+........................................................................................
+
+>>Inside Post entity as we can see that , we have name, we are going to search with name 
+>>Inside PostRepository create new method and this method will return list of post,Query for which will be findAllByNameContaining
+>>Inside PostServiceImp class create method searchByName      
+  >> mention searchByName method name inside PostService.java 
+>>create endpoint inside controller
+
+
+>>Open POSTMAN to check our endpoint is working or not,
+GET: http://localhost:8080/api/posts/search/aakash  
+
+........................................................................................
+Step16: Creating NEw page & calling Search post API
+........................................................................................
+>>Inside Angular create API call,open PostService.java and create method searchByName 
+>>Open Integrated terminal by selecting Page for Component,
+             ng g c SearchByName
+>>Create route for this component,by providing path and component inside object of routes              
+>>We need to update our Navigation bar,create button inside app.component.html after view All Post
+>>write neccessary code inside search-by-name.component.ts 
+>>open search-by-name.component.html, code is present over there 
+>>provide necessary code inside the CSS 
+>>THE END
+       
+
+
+
+Step :
+Postman to check search is working properly:
+............................................................
+GET:http://localhost:8080/api/posts/search/Aakash
+in end i used aakash as name with which i have created post is with aakash
+
+
+
+.................................
+If you want to post few more blogs on website
+.................................
+POST:http://localhost:8080/api/posts
+{ 
+    "name":"Aakash",
+    "content":"There has been a lot of hype about Dudhsagar trek being closed to the general public. The Dudhsagar railway trek has been officially closed to the general public but the trek to the Dudhsagar falls bottom is still open to all.",
+    "postedBy":"Abhay",
+    "image":"https://qph.cf2.quoracdn.net/main-qimg-3794d866c8ee7d6ef155c86c3949ed67-lq",
+    "tags":["Dudhsagar","train"]
+    
+}  
+
+To delete specific post using db
+.................................
+
+Query :
+DELETE FROM posts WHERE id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
+
+

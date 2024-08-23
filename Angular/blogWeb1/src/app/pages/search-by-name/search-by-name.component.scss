@@ -1,0 +1,43 @@
+.card-container{
+    margin: 16px;
+    max-width: 60%;
+    padding-bottom: 30px;
+}
+mat-card{
+    padding: 10px;
+}
+.example-header-image{
+    background-image: url('https://i3.wp.com/kb.rspca.org.au/wp-content/uploads/2018/11/golder-retriever-puppy.jpeg');
+    background-size: cover;
+}
+
+mat-card-footer{
+    margin-left: 20px;
+}
+mat-card-content{
+    margin-top: 10px;
+}
+.img{
+    object-fit: cover;
+}
+.comment-card{
+    margin-top: 20px;
+
+}
+mat-form-field{
+    width:100%;
+
+}
+.search-form {
+    
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    margin-top: 20px; /* Optional: adds space above the search form */
+  }
+  
+  .search-input {
+    display: flex;
+    align-items: center; /* Center vertically within the form field */
+    max-width: 400px; /* Optional: restricts the width of the form field */
+    width: 100%; /* Ensures it uses available width */
+  }
